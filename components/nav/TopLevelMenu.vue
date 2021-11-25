@@ -99,6 +99,13 @@ export default {
       return options.filter(opt => opt.inStore === 'management' && opt.category !== 'configuration' && opt.category !== 'legacy');
     },
 
+    services() {
+      return [
+        { label: 'Kafka', icon: 'icon-fleet', to: 'home' },
+        { label: 'Postgress', icon: 'icon-fleet', to: 'home' },
+      ];
+    },
+
     legacyApps() {
       const options = this.options;
 
@@ -257,6 +264,17 @@ export default {
               <div v-if="clustersFiltered.length === 0" class="none-matching">
                 {{ t('nav.search.noResults') }}
               </div>
+            </div>
+          </template>
+          <template>
+            <div class="category">
+              SERVICES
+            </div>
+            <div v-for="s in services" :key="s.label" @click="hide()">
+              <nuxt-link class="option" :to="s.to">
+                <i class="icon group-icon" :class="s.icon" />
+                <div>{{ s.label }}</div>
+              </nuxt-link>
             </div>
           </template>
 

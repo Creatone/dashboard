@@ -155,6 +155,7 @@ export const IF_HAVE = {
   NOT_V1_ISTIO:             'not-v1-istio',
   MULTI_CLUSTER:            'multi-cluster',
   HARVESTER_SINGLE_CLUSTER: 'harv-multi-cluster',
+  KAFKA:                    'kafka',
 };
 
 export function DSL(store, product, module = 'type-map') {
@@ -1615,6 +1616,10 @@ function ifHave(getters, option) {
   }
   case IF_HAVE.HARVESTER_SINGLE_CLUSTER: {
     return getters.isSingleVirtualCluster;
+  }
+  // TODO(Creatone): Should check for strimzi operator.
+  case IF_HAVE.KAFKA: {
+    return true;
   }
   default:
     return false;
