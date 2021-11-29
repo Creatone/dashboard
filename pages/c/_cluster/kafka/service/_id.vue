@@ -2,7 +2,7 @@
 import ResourceDetail from '@/components/ResourceDetail';
 
 export default {
-  name: 'RouteReceiverCreate',
+  name: 'KafkaService',
 
   components: { ResourceDetail },
 

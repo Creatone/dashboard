@@ -12,34 +12,34 @@ export function init(store) {
   } = DSL(store, NAME);
 
   product({
-    //TODO (Creatone): Add condition for Kafka.
-    //ifHave:     IF_HAVE.V2_MONITORING, // possible RBAC issue here if mon turned on but user doesn't have view/read roles on pod monitors
+    //  TODO (Creatone): Add condition for Kafka.
+    //  ifHave:     IF_HAVE.V2_MONITORING, // possible RBAC issue here if mon turned on but user doesn't have view/read roles on pod monitors
     icon:       'kafka',
-    weight:     90,
+    weight:     89,
   });
 
   virtualType({
     label:      'Kafka',
     namespaced: false,
-    name:       'monitoring-overview',
+    name:       'kafka',
     weight:     105,
-    route:      { name: 'c-cluster-monitoring' },
+    route:      { name: 'c-cluster-kafka' },
     exact:      true,
     overview:   true,
   });
 
   virtualType({
-    label:         'Create',
+    label:         'Service',
     group:         'kafka',
-    name:     'create',
+    name:     'service',
     icon:     'globe',
-    route: { name: 'c-cluster-kafka-create' }
+    route: { name: 'c-cluster-kafka-service' }
   });
 
-  configureType('create', { showListMasthead: false });
+  configureType('service', { showListMasthead: false });
 
   basicType([
     'kafka',
-    'create',
+    'service',
   ]);
 }
