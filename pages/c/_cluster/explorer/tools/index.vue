@@ -4,7 +4,6 @@ import Loading from '@/components/Loading';
 import { _FLAGGED, DEPRECATED, HIDDEN, FROM_TOOLS } from '@/config/query-params';
 import { filterAndArrangeCharts } from '@/store/catalog';
 import { CATALOG, MANAGEMENT, NORMAN } from '@/config/types';
-import { CATALOG as CATALOG_ANNOTATIONS } from '@/config/labels-annotations';
 import LazyImage from '@/components/LazyImage';
 import AppSummaryGraph from '@/components/formatter/AppSummaryGraph';
 import { sortBy } from '@/utils/sort';
@@ -111,13 +110,16 @@ export default {
       const clusterProvider = this.currentCluster.status.provider || 'other';
       const enabledCharts = (this.allCharts || []);
 
+      const strimziCatalogKey = 'a2741285-6f91-4026-a858-b8575736b435';
+
       let charts = filterAndArrangeCharts(enabledCharts, {
         isWindows:      this.currentCluster.providerOs === 'windows',
         clusterProvider,
         showDeprecated: this.showDeprecated,
         showHidden:     this.showHidden,
-        showRepos:      [this.rancherCatalog._key],
-        showTypes:      [CATALOG_ANNOTATIONS._CLUSTER_TOOL],
+        // TODO (Creatone): Add strimzi kafka operator.
+        showRepos:      [this.rancherCatalog._key, strimziCatalogKey], // Add strimzi repo key.
+        showTypes:      [], // Strimzi chart should have 'catalog.cattle.io/type: cluster-tool'.
       });
 
       //  If legacy support is enabled, show V1 charts for some V1 Cluster tools
